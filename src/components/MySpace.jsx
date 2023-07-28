@@ -28,7 +28,7 @@ export function MySpace(props) {
   })
   const textureOpacity = useMotionValue(0);
   useEffect(() => {
-    console.log('Animating, section is', section);
+
     animate(textureOpacity, section === 0 ? 1 : 0, {duration: 0.8})
   }, [section]);
 
@@ -173,3 +173,4 @@ export function MySpace(props) {
 }
 
 useGLTF.preload('models/nice.gltf')
+useGLTF.preload('textures/baked.jpg')

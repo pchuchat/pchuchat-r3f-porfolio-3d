@@ -18,13 +18,19 @@ import { Background } from "./Background"
 
 
 
+
 export const Experience = (props) => {
   const {menuOpened} = props
   const { viewport } = useThree()
   const [section,setSection]= useState(0)
   const data = useScroll()
-  const cameraPositionX = useMotionValue()
-  const cameraLookAtX = useMotionValue()
+  const cameraPositionX = useMotionValue(0)
+  const cameraLookAtX = useMotionValue(0)
+  const isMobile = window.innerWidth < 768;
+  const responsiveRatio = viewport.width / 12;
+  const officeScaleRatio = Math.max(0.5, Math.min(0.9 * responsiveRatio, 0.9));
+  
+
 
   useEffect(() => {
     animate(cameraPositionX, menuOpened ? -5: 0, {
@@ -60,7 +66,7 @@ export const Experience = (props) => {
     }, 350);
   }, [section]);
 
-
+  const characterGroup = useRef();
   useFrame((state) => {
 
     let curSection = Math.floor(data.scroll.current * data.pages);
@@ -76,6 +82,13 @@ export const Experience = (props) => {
     state.camera.position.x = cameraPositionX.get()
     state.camera.lookAt(cameraLookAtX.get(), 0, 0)
 
+    if (section === 0) {
+      
+      characterContainerAboutRef.current.getWorldPosition(
+        characterGroup.current.position
+      )
+    }
+
     // const position = new THREE.Vector3()
     // characterContainerAboutRef.current.getWorldPosition(position)
 
@@ -89,17 +102,18 @@ export const Experience = (props) => {
     // console.log([euler.x, euler.y, euler.z])
 
   });
-  
+
+
 
   return (
     <>
       <Background />
       <motion.group
-        position={[
-          6.46875617213277,
-          0.27079999999999996,
-          -9.711893452876
-        ]}
+      ref={characterGroup }
+    
+
+        scale={[officeScaleRatio , officeScaleRatio, officeScaleRatio]}
+        
         rotation={[
           -3.1415926535897913,
           1.5046370614359177,
@@ -111,51 +125,63 @@ export const Experience = (props) => {
         }}
         variants={{
           0: {
-            scaleX: 2,
-            scaleY: 2,
-            scaleZ: 2,
+            scaleX: officeScaleRatio * 2.4,
+            scaleY: officeScaleRatio * 2.4,
+            scaleZ: officeScaleRatio * 2.4,
           },
           1: {
             y: -viewport.height + 0.5,
-            x: 0,
+            x: isMobile ? 0.3 : 0,
             z: 7,
             rotateX: 0,
-            rotateY: 0,
+            rotateY: isMobile ? 0 : 0,
             rotateZ: 0,
+            scaleX: isMobile ? 1.5 : 1.3,
+            scaleY: isMobile ? 1.5 : 1.3,
+            scaleZ: isMobile ? 1.5 : 1.3,
           },
           2: {
-            x: -2,
+            x: isMobile ? -1.4 : -2,
             y: -viewport.height * 2 + 0.5,
             z: 0,
             rotateX: 0,
-            rotateY: Math.PI / 2,
+            rotateY: Math.PI / 2.5,
             rotateZ: 0,
+            scaleX: 1.5,
+            scaleY: 1.5,
+            scaleZ: 1.5,
           },
           3: {
             y: -viewport.height * 3 + 1,
-            x: 0.3,
+            x: 0.24,
             z: 8.5,
             rotateX: 0,
             rotateY: -Math.PI / 4,
             rotateZ: 0,
+            scaleX: 1,
+            scaleY: 1,
+            scaleZ: 1,
           },
         }}
       >
-        <Avatar animation={characterAnimation} />
+      <Avatar animation={characterAnimation} wireframe={section === 1} />
       </motion.group>
       <ambientLight intensity={1} />
       <motion.group
-        position={[4, -2, -9]}
-        scale={[0.9, 0.9, 0.9]}
+        position={[ isMobile ? 0:4 * officeScaleRatio, isMobile ? -viewport.height / 6 : -2, -9]}
+        scale={[officeScaleRatio, officeScaleRatio, officeScaleRatio]}
         rotation-y={-Math.PI / 2.5}
         animate={{
-          y: section === 0 ? 0 : -1,
+          y: isMobile ? -viewport.height / 6 : 0,
+        }}
+        transition={{
+          duration: 0.8,
         }}
       >
         <MySpace section={section} />
         <group
           ref={characterContainerAboutRef}
-          name="Empty" position={[0.184, 0.312, -3.126]} rotation={[-Math.PI, 0.248, -Math.PI]} 
+          name="Empty" position={[0.084, 0.212, -2.600]} rotation={[-Math.PI, 0.248, -Math.PI]} 
         ></group>
       </motion.group>
 

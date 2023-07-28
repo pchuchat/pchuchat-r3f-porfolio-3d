@@ -86,3 +86,8 @@ export function Avatar(props) {
 }
 
 useGLTF.preload('models/64bd44c34e1697f144ef955f.glb')
+useFBX.preload("animations/Typing.fbx")
+useFBX.preload("animations/Defeated.fbx")
+useFBX.preload("animations/Falling Idle.fbx")
+useFBX.preload("animations/Talking On A Cell Phone.fbx")
+useFBX.preload("animations/Male Standing Pose.fbx")

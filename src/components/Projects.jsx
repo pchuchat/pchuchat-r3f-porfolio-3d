@@ -38,6 +38,7 @@ export const projects = [
     {
         title: "My Porfolio",
         image: "projects/porpolio.jpg",
+        url: "https://tinkerit.fi/",
         description: "website with React Three Fiber",
       },
   ];
