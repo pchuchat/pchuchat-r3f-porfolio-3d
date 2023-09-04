@@ -48,7 +48,7 @@ export const projects = [
         description: "Your Intelligent Friends",
       },
       {
-        title: "Dashboard for e-commerce ",
+        title: "Dashboard",
         image: "projects/dashboard.jpg",
         url: "https://e-commerce-pchuchat.vercel.app/",
         description: "Dashboard for your online store",
