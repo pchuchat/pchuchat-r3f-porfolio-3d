@@ -32,5 +32,9 @@
     "postcss": "^8.4.27",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.7"
-  }
+  },
+  "description": "A boilerplate to build R3F projects",
+  "main": "postcss.config.js",
+  "author": "",
+  "license": "ISC"
 }

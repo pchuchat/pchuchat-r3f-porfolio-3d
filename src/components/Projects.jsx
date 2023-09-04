@@ -38,8 +38,26 @@ export const projects = [
     {
         title: "My Porfolio",
         image: "projects/porpolio.jpg",
-        url: "https://tinkerit.fi/",
+        url: "https://pc7.netlify.app/",
         description: "website with React Three Fiber",
+      },
+      {
+        title: "Companion.ai",
+        image: "projects/companion.jpg",
+        url: "https://ai-app-drab.vercel.app/",
+        description: "Your Intelligent Friends",
+      },
+      {
+        title: "Dashboard for e-commerce ",
+        image: "projects/dashboard.jpg",
+        url: "https://e-commerce-pchuchat.vercel.app/",
+        description: "Dashboard for your online store",
+      },
+      {
+        title: "e-commerce",
+        image: "projects/testMarket.jpg",
+        url: "https://store-flax-kappa.vercel.app/",
+        description: "online store",
       },
   ];
 
